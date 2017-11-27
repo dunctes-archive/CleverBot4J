@@ -16,7 +16,6 @@
 
 package ml.duncte123.CleverBot4J;
 
-import okhttp3.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,27 +27,52 @@ public class CleverbotBuilder {
     private String apiKey;
     private String nickname;
 
+    /**
+     * This sets the user token that you should have gotten from the <a href="https://cleverbot.io/">https://cleverbot.io/</a> website
+     * @param user the user key provided by <a href="https://cleverbot.io/keys">https://cleverbot.io/keys</a>
+     * @return the current {@link CleverbotBuilder builder}, useful for chaining
+     */
     public CleverbotBuilder setApiUser(String user) {
         this.userKey = user;
         return this;
     }
 
+    /**
+     * This sets the api token that you should have gotten from the <a href="https://cleverbot.io/">https://cleverbot.io/</a> website
+     * @param key the api key provided by <a href="https://cleverbot.io/keys">https://cleverbot.io/keys</a>
+     * @return the current {@link CleverbotBuilder builder}, useful for chaining
+     */
     public CleverbotBuilder setApiKey(String key) {
         this.apiKey = key;
         return this;
     }
 
+    /**
+     * This sets the user token and the api that you should have gotten from the <a href="https://cleverbot.io/">https://cleverbot.io/</a> website
+     * @param user the user key provided by <a href="https://cleverbot.io/keys">https://cleverbot.io/keys</a>
+     * @param api the api key provided by <a href="https://cleverbot.io/keys">https://cleverbot.io/keys</a>
+     * @return the current {@link CleverbotBuilder builder}, useful for chaining
+     */
     public CleverbotBuilder setKeys(String user, String api){
         this.userKey = user;
         this.apiKey = api;
         return this;
     }
 
+    /**
+     * This sets the nickname that the bot has, this is optional
+     * @param nickname the nickname that you want your bot to have
+     * @return the current {@link CleverbotBuilder builder}, useful for chaining
+     */
     public CleverbotBuilder setNickname(String nickname) {
         this.nickname = nickname;
         return this;
     }
 
+    /**
+     * This builds the api into the {@link CleverbotAPI CleverbotAPI} for you to send your questions to
+     * @return the {@link CleverbotAPI CleverbotAPI} that you can use
+     */
     public CleverbotAPI build() {
         try {
             JSONObject jsonData = new JSONObject()

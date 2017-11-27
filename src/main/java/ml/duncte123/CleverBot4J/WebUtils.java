@@ -27,7 +27,12 @@ public class WebUtils {
 
     private static OkHttpClient client = new OkHttpClient();
 
-
+    /**
+     * This is a util to send json data to apie
+     * @param url the url to post to
+     * @param data a {@link org.json.JSONObject JSONObject} with the data that you want to send
+     * @return the response from the server wrapped in the okhttp {@link okhttp3.Response Response} class
+     */
     public static Response postJSON(String url, JSONObject data) {
         RequestBody body = RequestBody.create(MediaType.parse("application/json"), data.toString());
 

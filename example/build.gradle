@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    maven {
+        name 'jitpack'
+        url 'https://jitpack.io'
+    }
+}
+
+dependencies {
+    compile 'com.github.duncte123:CleverBot4J:-SNAPSHOT'
+}
+
+mainClassName = "ml.duncte123.Cleverbot4J.example.Main"

@@ -33,6 +33,19 @@ public class CleverbotAPI {
         this.nickname = nick;
     }
 
+    /**
+     * Returns the bots nickname
+     * @return the bots nickname
+     */
+    public String getNickname() {
+        return nickname;
+    }
+
+    /**
+     * This sends a question to the bot
+     * @param question the question that you have for the bot
+     * @return what the bot replies to you
+     */
     public String askQuestion(String question) {
         String status = "";
         try {
