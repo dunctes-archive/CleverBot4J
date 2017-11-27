@@ -38,6 +38,13 @@ task wrapper(type: Wrapper) {
 bintray {
     user = 'duncte123'
     key = '95b2a180808f523b55c15b60cd67b3b3a7a5db97'
+    pkg {
+        repo = 'Cleverbot4J'
+        name = 'Cleverbot4J'
+        userOrg = 'duncte123'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/duncte123/CleverBot4J.git'
+    }
 }
 publishing {
     publications {
