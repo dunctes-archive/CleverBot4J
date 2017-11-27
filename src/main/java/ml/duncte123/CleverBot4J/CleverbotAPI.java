@@ -50,9 +50,9 @@ public class CleverbotAPI {
         String status = "";
         try {
             JSONObject jsonData = new JSONObject()
-                    .put("user", userKey)
-                    .put("api", apiKey)
-                    .put("nick", nickname)
+                    .put("user", this.userKey)
+                    .put("key", this.apiKey)
+                    .put("nick", this.nickname)
                     .put("text", question);
 
             String response = WebUtils.postJSON(WebUtils.baseUrl + "ask", jsonData).body().source().readUtf8();

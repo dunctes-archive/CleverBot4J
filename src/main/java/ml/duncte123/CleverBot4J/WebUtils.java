@@ -39,7 +39,7 @@ public class WebUtils {
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
-                .addHeader("User-Agent", "")
+                .addHeader("User-Agent", "Java Cleverbot API (https://github.com/duncte123/CleverBot4J)")
                 .build();
 
         try {

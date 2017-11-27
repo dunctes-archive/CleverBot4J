@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         //Load the api
         CleverbotAPI api = new CleverbotBuilder()
-                .setApiUser("CLEVERBOT_USER_KEY")
+                .setUserKey("CLEVERBOT_USER_KEY")
                 .setApiKey("CLEVERBOT_API_KEY")
                 .build();
 

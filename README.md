@@ -49,7 +49,7 @@ The nickname is optional
 
 ```JAVA
 CleverbotAPI api = new CleverbotBuilder()
-                .setApiUser("CLEVERBOT_USER_KEY")
+                .setUserKey("CLEVERBOT_USER_KEY")
                 .setApiKey("CLEVERBOT_API_KEY")
                 .setNickname("Cleverbot4J")
                 .build();

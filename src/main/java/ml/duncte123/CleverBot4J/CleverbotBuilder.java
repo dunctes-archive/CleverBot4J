@@ -32,7 +32,7 @@ public class CleverbotBuilder {
      * @param user the user key provided by <a href="https://cleverbot.io/keys">https://cleverbot.io/keys</a>
      * @return the current {@link CleverbotBuilder builder}, useful for chaining
      */
-    public CleverbotBuilder setApiUser(String user) {
+    public CleverbotBuilder setUserKey(String user) {
         this.userKey = user;
         return this;
     }
@@ -76,11 +76,11 @@ public class CleverbotBuilder {
     public CleverbotAPI build() {
         try {
             JSONObject jsonData = new JSONObject()
-                    .put("user", userKey)
-                    .put("api", apiKey);
+                    .put("user", this.userKey)
+                    .put("key", this.apiKey);
 
             if (nickname != null) {
-                jsonData.put("nick", nickname);
+                jsonData.put("nick", this.nickname);
             }
 
             String response = WebUtils.postJSON(WebUtils.baseUrl + "create", jsonData).body().source().readUtf8();
