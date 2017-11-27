@@ -1,8 +1,8 @@
-#CleverBot4J [![](https://jitpack.io/v/duncte123/CleverBot4J.svg)](https://jitpack.io/#duncte123/CleverBot4J)
+# CleverBot4J [![](https://jitpack.io/v/duncte123/CleverBot4J.svg)](https://jitpack.io/#duncte123/CleverBot4J)
 
 CleverBot4J is a java api for [cleverbot.io](https://cleverbot.io)
 
-##maven package
+## maven package
 * Repository: jitpack
 * Artifact: **com.github.duncte123:CleverBot4J:-SNAPSHOT**
 
@@ -37,7 +37,7 @@ Using in Maven:
 ```
 
 ## Usage
-####Setting the api up
+#### Setting the api up
 
 First you need to get an api and user key from [this page](https://cleverbot.io/keys).
 
