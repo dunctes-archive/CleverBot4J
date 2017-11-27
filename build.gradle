@@ -35,7 +35,10 @@ task wrapper(type: Wrapper) {
     gradleVersion = '3.4.1'
 }
 
-
+bintray {
+    user = 'duncte123'
+    key = '95b2a180808f523b55c15b60cd67b3b3a7a5db97'
+}
 publishing {
     publications {
         maven(MavenPublication) {
