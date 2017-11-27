@@ -92,5 +92,6 @@ hs_err_pid*
 
 \.gradle/
 \.idea/
+build/
 
 # End of https://www.gitignore.io/api/java,intellij

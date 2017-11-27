@@ -1,0 +1,27 @@
+{
+  "package": {
+    "name": "Cleverbot4J",
+    "repo": "maven",
+    "subject": "duncte123",
+    "desc": "A java cleverbot api",
+    "website_url": "https://cleverbot.io",
+    "issue_tracker_url": "https://github.com/duncte123/CleverBot4J/issues",
+    "vcs_url": "https://github.com/duncte123/CleverBot4J.git",
+    "licenses": ["Apache-2.0"],
+    "labels": ["java", "bintray", "Cleverbot"],
+    "public_download_numbers": false,
+    "public_stats": false
+  },
+
+  "version": {
+    "name": "1.0.0",
+    "released": "2017-11-27",
+    "gpgSign": false
+  },
+
+  "files":
+  [
+    {"includePattern": "build/libs/(.*)", "uploadPattern": "me/duncte123/CleverBot4J/1.0.0/$1"}
+  ],
+  "publish": true
+}

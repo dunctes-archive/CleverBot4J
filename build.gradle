@@ -17,14 +17,46 @@
 plugins {
     id 'com.jfrog.bintray' version '1.7.3'
     id 'java'
+    id 'maven-publish'
 }
 
 group = "ml.duncte123"
 archivesBaseName = "CleverBot4J"
-version = "0.0.1"
+version = "1.0.0"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     jcenter()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.4.1'
+}
+
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            pom.withXml {
+                asNode().dependencies.'*'.findAll() {
+                    it.scope.text() == 'runtime' && project.configurations.compile.allDependencies.find { dep ->
+                        dep.name == it.artifactId.text()
+                    }
+                }.each() {
+                    it.scope*.value = 'compile'
+                }
+            }
+        }
+    }
+}
+
+model {
+    tasks.generatePomFileForMavenPublication {
+        destination = file("$buildDir/libs/Cleverbot4J-" + version + ".pom")
+    }
 }
 
 dependencies {
