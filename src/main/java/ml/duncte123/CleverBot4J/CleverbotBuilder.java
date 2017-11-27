@@ -90,7 +90,7 @@ public class CleverbotBuilder {
             if(!status.equals("success")){
                 throw new IOException("Cleverbot responded with unexpected status: "+status);
             }
-            String nick = returnJSON.getString("nick");
+            String nick = nickname!=null ? nickname : returnJSON.getString("nick");
             return new CleverbotAPI(userKey, apiKey, nick);
         }
         catch (JSONException | IOException e) {
