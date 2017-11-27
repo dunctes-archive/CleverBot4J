@@ -2,7 +2,7 @@
 
 CleverBot4J is a java api for [cleverbot.io](https://cleverbot.io)
 
-###Using package
+##maven package
 * Repository: jitpack
 * Artifact: **com.github.duncte123:CleverBot4J:-SNAPSHOT**
 
