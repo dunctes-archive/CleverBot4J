@@ -18,6 +18,14 @@ public class Main {
         System.out.println("User: " + question);
         //Show the answer
         System.out.println(api.getNickname() + ": " + answer);
+
+        /*
+        The above program should output something like
+            User: Just a small town girl
+            tRIj5NEn: Livin in a lonely world!
+
+         the api made up a name for the bot
+         */
     }
 
 }
