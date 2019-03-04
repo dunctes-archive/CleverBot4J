@@ -49,15 +49,17 @@ public class CleverbotAPI {
     public String askQuestion(String question) {
         String status = "";
         try {
-            JSONObject jsonData = new JSONObject()
+            final JSONObject jsonData = new JSONObject()
                     .put("user", this.userKey)
                     .put("key", this.apiKey)
                     .put("nick", this.nickname)
                     .put("text", question);
 
-            String response = WebUtils.postJSON(WebUtils.baseUrl + "ask", jsonData).body().source().readUtf8();
-            JSONObject returnJson = new JSONObject(response);
+            final String response = WebUtils.postJSON(WebUtils.baseUrl + "ask", jsonData).body().string();
+            final JSONObject returnJson = new JSONObject(response);
+
             status = returnJson.getString("status");
+
             return returnJson.getString("response");
         }
         catch (JSONException | IOException e) {

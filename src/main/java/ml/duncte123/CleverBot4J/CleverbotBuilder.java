@@ -34,6 +34,7 @@ public class CleverbotBuilder {
      */
     public CleverbotBuilder setUserKey(String user) {
         this.userKey = user;
+
         return this;
     }
 
@@ -44,6 +45,7 @@ public class CleverbotBuilder {
      */
     public CleverbotBuilder setApiKey(String key) {
         this.apiKey = key;
+
         return this;
     }
 
@@ -56,6 +58,7 @@ public class CleverbotBuilder {
     public CleverbotBuilder setKeys(String user, String api){
         this.userKey = user;
         this.apiKey = api;
+
         return this;
     }
 
@@ -66,6 +69,7 @@ public class CleverbotBuilder {
      */
     public CleverbotBuilder setNickname(String nickname) {
         this.nickname = nickname;
+
         return this;
     }
 
@@ -75,7 +79,7 @@ public class CleverbotBuilder {
      */
     public CleverbotAPI build() {
         try {
-            JSONObject jsonData = new JSONObject()
+            final JSONObject jsonData = new JSONObject()
                     .put("user", this.userKey)
                     .put("key", this.apiKey);
 
@@ -83,14 +87,16 @@ public class CleverbotBuilder {
                 jsonData.put("nick", this.nickname);
             }
 
-            String response = WebUtils.postJSON(WebUtils.baseUrl + "create", jsonData).body().source().readUtf8();
-            JSONObject returnJSON = new JSONObject(response);
-            String status = returnJSON.getString("status");
+            final String response = WebUtils.postJSON(WebUtils.baseUrl + "create", jsonData).body().string();
+            final JSONObject returnJSON = new JSONObject(response);
+            final String status = returnJSON.getString("status");
 
             if(!status.equals("success")){
                 throw new IOException("Cleverbot responded with unexpected status: "+status);
             }
-            String nick = returnJSON.getString("nick");
+
+            final String nick = returnJSON.getString("nick");
+
             return new CleverbotAPI(userKey, apiKey, nick);
         }
         catch (JSONException | IOException e) {

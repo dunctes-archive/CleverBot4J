@@ -16,27 +16,34 @@
 
 package ml.duncte123.CleverBot4J;
 
+import jdk.internal.jline.internal.Nullable;
 import okhttp3.*;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class WebUtils {
 
     public static final String baseUrl = "https://cleverbot.io/1.0/";
 
-    private static OkHttpClient client = new OkHttpClient();
+    private static OkHttpClient client = new OkHttpClient.Builder()
+            .connectTimeout(60L, TimeUnit.SECONDS)
+            .readTimeout(60L, TimeUnit.SECONDS)
+            .writeTimeout(60L, TimeUnit.SECONDS)
+            .build();
 
     /**
-     * This is a util to send json data to apie
+     * This is a util to send json data to api
      * @param url the url to post to
      * @param data a {@link org.json.JSONObject JSONObject} with the data that you want to send
      * @return the response from the server wrapped in the okhttp {@link okhttp3.Response Response} class
      */
+    @Nullable
     public static Response postJSON(String url, JSONObject data) {
-        RequestBody body = RequestBody.create(MediaType.parse("application/json"), data.toString());
-
-        Request request = new Request.Builder()
+        final RequestBody body = RequestBody.create(MediaType.parse("application/json"), data.toString());
+        final Request request = new Request.Builder()
                 .url(url)
                 .post(body)
                 .addHeader("User-Agent", "Java Cleverbot API (https://github.com/duncte123/CleverBot4J)")
