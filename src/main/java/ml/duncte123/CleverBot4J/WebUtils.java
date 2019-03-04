@@ -16,12 +16,10 @@
 
 package ml.duncte123.CleverBot4J;
 
-import jdk.internal.jline.internal.Nullable;
 import okhttp3.*;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class WebUtils {
@@ -40,7 +38,6 @@ public class WebUtils {
      * @param data a {@link org.json.JSONObject JSONObject} with the data that you want to send
      * @return the response from the server wrapped in the okhttp {@link okhttp3.Response Response} class
      */
-    @Nullable
     public static Response postJSON(String url, JSONObject data) {
         final RequestBody body = RequestBody.create(MediaType.parse("application/json"), data.toString());
         final Request request = new Request.Builder()
