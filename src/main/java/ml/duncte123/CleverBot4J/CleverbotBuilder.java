@@ -28,8 +28,12 @@ public class CleverbotBuilder {
     private String nickname;
 
     /**
-     * This sets the user token that you should have gotten from the <a href="https://cleverbot.io/">https://cleverbot.io/</a> website
-     * @param user the user key provided by <a href="https://cleverbot.io/keys">https://cleverbot.io/keys</a>
+     * This sets the user token that you should have gotten from the <a href="https://cleverbot.io/">https://cleverbot.io/</a>
+     * website
+     *
+     * @param user
+     *         the user key provided by <a href="https://cleverbot.io/keys">https://cleverbot.io/keys</a>
+     *
      * @return the current {@link CleverbotBuilder builder}, useful for chaining
      */
     public CleverbotBuilder setUserKey(String user) {
@@ -39,8 +43,12 @@ public class CleverbotBuilder {
     }
 
     /**
-     * This sets the api token that you should have gotten from the <a href="https://cleverbot.io/">https://cleverbot.io/</a> website
-     * @param key the api key provided by <a href="https://cleverbot.io/keys">https://cleverbot.io/keys</a>
+     * This sets the api token that you should have gotten from the <a href="https://cleverbot.io/">https://cleverbot.io/</a>
+     * website
+     *
+     * @param key
+     *         the api key provided by <a href="https://cleverbot.io/keys">https://cleverbot.io/keys</a>
+     *
      * @return the current {@link CleverbotBuilder builder}, useful for chaining
      */
     public CleverbotBuilder setApiKey(String key) {
@@ -50,12 +58,17 @@ public class CleverbotBuilder {
     }
 
     /**
-     * This sets the user token and the api that you should have gotten from the <a href="https://cleverbot.io/">https://cleverbot.io/</a> website
-     * @param user the user key provided by <a href="https://cleverbot.io/keys">https://cleverbot.io/keys</a>
-     * @param api the api key provided by <a href="https://cleverbot.io/keys">https://cleverbot.io/keys</a>
+     * This sets the user token and the api that you should have gotten from the <a
+     * href="https://cleverbot.io/">https://cleverbot.io/</a> website
+     *
+     * @param user
+     *         the user key provided by <a href="https://cleverbot.io/keys">https://cleverbot.io/keys</a>
+     * @param api
+     *         the api key provided by <a href="https://cleverbot.io/keys">https://cleverbot.io/keys</a>
+     *
      * @return the current {@link CleverbotBuilder builder}, useful for chaining
      */
-    public CleverbotBuilder setKeys(String user, String api){
+    public CleverbotBuilder setKeys(String user, String api) {
         this.userKey = user;
         this.apiKey = api;
 
@@ -64,7 +77,10 @@ public class CleverbotBuilder {
 
     /**
      * This sets the nickname that the bot has, this is optional
-     * @param nickname the nickname that you want your bot to have
+     *
+     * @param nickname
+     *         the nickname that you want your bot to have
+     *
      * @return the current {@link CleverbotBuilder builder}, useful for chaining
      */
     public CleverbotBuilder setNickname(String nickname) {
@@ -75,6 +91,7 @@ public class CleverbotBuilder {
 
     /**
      * This builds the api into the {@link CleverbotAPI CleverbotAPI} for you to send your questions to
+     *
      * @return the {@link CleverbotAPI CleverbotAPI} that you can use
      */
     public CleverbotAPI build() {
@@ -91,15 +108,14 @@ public class CleverbotBuilder {
             final JSONObject returnJSON = new JSONObject(response);
             final String status = returnJSON.getString("status");
 
-            if(!status.equals("success")){
-                throw new IOException("Cleverbot responded with unexpected status: "+status);
+            if (!status.equals("success")) {
+                throw new IOException("Cleverbot responded with unexpected status: " + status);
             }
 
             final String nick = returnJSON.getString("nick");
 
             return new CleverbotAPI(userKey, apiKey, nick);
-        }
-        catch (JSONException | IOException e) {
+        } catch (JSONException | IOException e) {
             throw new RuntimeException(e);
         }
     }

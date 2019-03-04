@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 public class WebUtils {
 
@@ -34,8 +35,12 @@ public class WebUtils {
 
     /**
      * This is a util to send json data to api
-     * @param url the url to post to
-     * @param data a {@link org.json.JSONObject JSONObject} with the data that you want to send
+     *
+     * @param url
+     *         the url to post to
+     * @param data
+     *         a {@link org.json.JSONObject JSONObject} with the data that you want to send
+     *
      * @return the response from the server wrapped in the okhttp {@link okhttp3.Response Response} class
      */
     public static Response postJSON(String url, JSONObject data) {
@@ -52,6 +57,39 @@ public class WebUtils {
             e.printStackTrace();
             return null;
         }
+    }
+
+    /**
+     * This is a util to send json data to api
+     *
+     * @param url
+     *         the url to post to
+     * @param data
+     *         a {@link org.json.JSONObject JSONObject} with the data that you want to send
+     * @param success
+     *         The success consumer
+     * @param failure
+     *         the error consumer
+     */
+    public static void postJSONAsync(String url, JSONObject data, Consumer<String> success, Consumer<Throwable> failure) {
+        final RequestBody body = RequestBody.create(MediaType.parse("application/json"), data.toString());
+        final Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .addHeader("User-Agent", "Java Cleverbot API (https://github.com/duncte123/CleverBot4J)")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                failure.accept(e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                success.accept(response.body().string());
+            }
+        });
     }
 
 }

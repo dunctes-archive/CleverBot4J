@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.function.Consumer;
 
 public class CleverbotAPI {
 
@@ -35,6 +36,7 @@ public class CleverbotAPI {
 
     /**
      * Returns the bots nickname
+     *
      * @return the bots nickname
      */
     public String getNickname() {
@@ -43,7 +45,10 @@ public class CleverbotAPI {
 
     /**
      * This sends a question to the bot
-     * @param question the question that you have for the bot
+     *
+     * @param question
+     *         the question that you have for the bot
+     *
      * @return what the bot replies to you
      */
     public String askQuestion(String question) {
@@ -61,10 +66,59 @@ public class CleverbotAPI {
             status = returnJson.getString("status");
 
             return returnJson.getString("response");
-        }
-        catch (JSONException | IOException e) {
+        } catch (JSONException | IOException e) {
             throw new RuntimeException(status, e);
         }
+    }
+
+    /**
+     * This sends a question to the bot
+     *
+     * @param question
+     *         the question that you have for the bot
+     * @param success
+     *         The response of the bot
+     */
+    public void askQuestionAsync(String question, Consumer<String> success) {
+        askQuestionAsync(question, success, null);
+    }
+
+    /**
+     * This sends a question to the bot
+     *
+     * @param question
+     *         the question that you have for the bot
+     * @param success
+     *         The response of the bot
+     * @param failure
+     *         Called when an error occurs
+     */
+    public void askQuestionAsync(String question, Consumer<String> success, Consumer<Throwable> failure) {
+        final JSONObject jsonData = new JSONObject()
+                .put("user", this.userKey)
+                .put("key", this.apiKey)
+                .put("nick", this.nickname)
+                .put("text", question);
+
+        Consumer<Throwable> throwableConsumer = failure;
+
+        if (throwableConsumer == null) {
+            throwableConsumer = Throwable::printStackTrace;
+        }
+
+        final Consumer<Throwable> finalErrorConsumer = throwableConsumer;
+
+        WebUtils.postJSONAsync(
+                WebUtils.baseUrl + "ask",
+                jsonData,
+                (response) -> {
+                    final JSONObject returnJson = new JSONObject(response);
+
+                    success.accept(returnJson.getString("response"));
+
+                },
+                (error) -> finalErrorConsumer.accept(new RuntimeException(error))
+        );
     }
 
 }
