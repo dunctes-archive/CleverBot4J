@@ -1,6 +1,9 @@
 # CleverBot4J [![](https://jitpack.io/v/duncte123/CleverBot4J.svg)](https://jitpack.io/#duncte123/CleverBot4J)
 
-CleverBot4J is a java api for [cleverbot.io](https://cleverbot.io)
+CleverBot4J is a java api wrapper for [cleverbot.io](https://cleverbot.io)
+
+# Cleverbot.io is dead
+Unfortunately this api has died
 
 ## maven package
 * Repository: jitpack
